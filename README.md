@@ -2,6 +2,8 @@
 
 一个简单的 CLI 来快速创建你的项目
 
+![suemo-create](https://user-images.githubusercontent.com/89030875/209678117-6043c5fc-1e9c-4f04-ba35-b36ac2dc7b8e.gif)
+
 ## 使用
 
 ```bash
