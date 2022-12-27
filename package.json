@@ -3,7 +3,7 @@
   "version": "0.0.4",
   "author": "suemor <suemor233@outlook.com>",
   "bin": {
-    "sr": "./bin/cli.js"
+    "sr": "bin/cli.js"
   },
   "license": "MIT",
   "description": "A Command Line Tool to start a project",

@@ -2,19 +2,24 @@ import chalk from 'chalk'
 import { program } from 'commander'
 import figlet from 'figlet'
 import fs from 'fs-extra'
+import { dirname } from 'path'
+import { fileURLToPath } from 'url'
+
 import { error } from '../utils/log.js'
 import { create } from './create'
 
-// const packageJson = JSON.parse(
-//   fs.readFileSync('./package.json', {
-//     encoding: 'utf-8',
-//   }),
-// )
+const __dirname = dirname(fileURLToPath(import.meta.url))
+
+const packageJson = JSON.parse(
+  fs.readFileSync(`${__dirname}/../package.json`, {
+    encoding: 'utf-8',
+  }),
+)
 
 const main = async () => {
   program
     .command('create')
-    .description('创建一个项目')
+    .description('create a project')
     .argument('[name]', '项目名称')
     .option('-f, --force', '如果文件夹存在则覆盖')
     .helpOption('-h, --help', '查看帮助')
@@ -22,10 +27,10 @@ const main = async () => {
       create(name, options)
     })
 
-  // program
-  //   .description('查看当前 cli 版本')
-  //   .version(`v${packageJson.version}`)
-  //   .usage('<command> [option]')
+  program
+    .description('查看当前 cli 版本')
+    .version(`v${packageJson.version}`)
+    .usage('<command> [option]')
 
   program.on('--help', async () => {
     console.log(
