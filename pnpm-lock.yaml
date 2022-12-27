@@ -3,6 +3,7 @@ lockfileVersion: 5.4
 specifiers:
   '@suemor/eslint-config-ts': ^1.0.1
   '@suemor/prettier': ^1.0.1
+  '@types/cross-spawn': ^6.0.2
   '@types/figlet': ^1.5.5
   '@types/fs-extra': ^9.0.13
   '@types/node': ^18.11.18
@@ -10,6 +11,7 @@ specifiers:
   axios: ^1.2.1
   chalk: ^5.2.0
   commander: ^9.4.1
+  cross-spawn: ^7.0.3
   cz-git: ^1.4.1
   download-git-repo: ^3.0.2
   figlet: ^1.5.2
@@ -29,12 +31,14 @@ dependencies:
 devDependencies:
   '@suemor/eslint-config-ts': 1.0.1_typescript@4.9.4
   '@suemor/prettier': 1.0.1
+  '@types/cross-spawn': 6.0.2
   '@types/figlet': 1.5.5
   '@types/fs-extra': 9.0.13
   '@types/node': 18.11.18
   '@types/prompts': 2.4.2
   axios: 1.2.1
   commander: 9.4.1
+  cross-spawn: 7.0.3
   cz-git: 1.4.1
   fs-extra: 11.1.0
   kolorist: 1.6.0
@@ -504,6 +508,12 @@ packages:
       prettier-package-json: 2.6.3
     transitivePeerDependencies:
       - supports-color
+    dev: true
+
+  /@types/cross-spawn/6.0.2:
+    resolution: {integrity: sha512-KuwNhp3eza+Rhu8IFI5HUXRP0LIhqH5cAjubUvGXXthh4YYBuP2ntwEX+Cz8GJoZUHlKo247wPWOfA9LYEq4cw==}
+    dependencies:
+      '@types/node': 18.11.18
     dev: true
 
   /@types/estree/1.0.0:

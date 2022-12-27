@@ -1,3 +1,4 @@
+import chalk from 'chalk'
 import downloadGitRepo from 'download-git-repo'
 import fs from 'fs-extra'
 import path from 'node:path'
@@ -5,6 +6,7 @@ import prompts from 'prompts'
 import utils from 'util'
 
 import { wrapLoading } from '../utils/animation.js'
+import { install } from '../utils/install.js'
 import { error, success } from '../utils/log.js'
 import { getRepoList } from './http.js'
 
@@ -27,10 +29,11 @@ const existFolder = async (name: string, options: any) => {
       initial: true,
       message: '当前文件夹已经存在是否覆盖？',
       onState: (state) => {
-        error(`请先移除当前文件夹`)
-        !state.value && process.exit(0)
+        if (!state.value) {
+          error(`请先移除当前文件夹`)
+          process.exit(0)
+        }
         fs.removeSync(targetDir)
-        success(`覆盖成功`)
       },
     })
   }
@@ -41,7 +44,7 @@ const createFolder = async (name: string) => {
   const targetDir = path.join(cwd, name)
   const repoList = await wrapLoading(getRepoList, '获取模板列表中。。。')
 
-  const { template } = await prompts([
+  const { template, installTools } = await prompts([
     {
       type: 'select',
       name: 'template',
@@ -53,10 +56,50 @@ const createFolder = async (name: string) => {
         }
       }),
     },
-    
+    {
+      type: 'select',
+      name: 'installTools',
+      message: '选择什么工具安装依赖？',
+      choices: [
+        {
+          title: 'pnpm',
+          value: 'pnpm',
+        },
+        {
+          title: 'yarn',
+          value: 'yarn',
+        },
+        {
+          title: 'npm',
+          value: 'npm',
+        },
+      ],
+      initial: 0,
+    },
   ])
 
-  fetchGitRepo(template, targetDir)
+  try {
+    await fetchGitRepo(template, targetDir)
+  } catch (error) {
+    error('下载模板失败')
+    process.exit(0)
+  }
+
+  await updatePackageJson(name, targetDir)
+
+  try {
+    await install({
+      cwd: targetDir,
+      package: installTools,
+    })
+  } catch (error) {
+    error('安装失败')
+    process.exit(0)
+  }
+
+  success(`成功安装依赖`)
+  console.log(`\r\n  cd ${chalk.cyan(name)}`)
+  console.log(`  ${installTools} run dev\r\n`)
 }
 
 const fetchGitRepo = async (template: string, targetDir: string) => {
@@ -67,6 +110,15 @@ const fetchGitRepo = async (template: string, targetDir: string) => {
     requestUrl,
     path.resolve(process.cwd(), targetDir),
   )
+}
 
-  success('下载成功')
+const updatePackageJson = async (name: string, targetDir: string) => {
+  const _path = path.resolve(targetDir, 'package.json')
+  const packageJson = JSON.parse(fs.readFileSync(_path, 'utf-8'))
+  if (!packageJson) {
+    error('无法找到 package.json')
+    process.exit(0)
+  }
+  packageJson.name = name
+  fs.writeFileSync(_path, JSON.stringify(packageJson, null, 2))
 }
