@@ -1,6 +1,6 @@
 {
   "name": "@suemor/create-project",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "author": "suemor <suemor233@outlook.com>",
   "license": "MIT",
   "description": "A Command Line Tool to start a project",
