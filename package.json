@@ -35,6 +35,7 @@
     "commit_message": "chore(release): bump @suemor/suemor-cli to v${NEW_VERSION}"
   },
   "scripts": {
+    "prepare": "node ./scripts/check-config.js",
     "dev": "npm run build && node dist/index.mjs",
     "build": "unbuild",
     "lint": "eslint ."
@@ -55,7 +56,6 @@
     "@types/fs-extra": "^9.0.13",
     "@types/node": "^18.11.18",
     "@types/prompts": "^2.4.2",
-    "axios": "^1.2.1",
     "commander": "^9.4.1",
     "cross-spawn": "^7.0.3",
     "cz-git": "^1.4.1",

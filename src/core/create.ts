@@ -5,10 +5,10 @@ import path from 'node:path'
 import prompts from 'prompts'
 import utils from 'util'
 
+import defineConfig from '../../config'
 import { wrapLoading } from '../utils/animation.js'
 import { install } from '../utils/install.js'
 import { error, success } from '../utils/log.js'
-import { getRepoList } from './http.js'
 
 export const create = async (name: string, options: any) => {
   if (!name) {
@@ -30,7 +30,7 @@ const inputName = async () => {
           process.exit(0)
         })
       }
-    }
+    },
   })
 }
 
@@ -57,7 +57,7 @@ const checkFolder = async (name: string, options: any) => {
           error(`请先移除当前文件夹`)
           process.exit(0)
         }
-        fs.removeSync(targetDir)
+        fs.remove(targetDir)
       },
     })
   }
@@ -66,17 +66,16 @@ const checkFolder = async (name: string, options: any) => {
 const createFolder = async (name: string) => {
   const cwd = process.cwd()
   const targetDir = path.join(cwd, name)
-  const repoList = await wrapLoading(getRepoList, '获取模板列表中。。。')
 
   const { template, installTools } = await prompts([
     {
       type: 'select',
       name: 'template',
       message: '请选择模板',
-      choices: repoList.map((item) => {
+      choices: defineConfig.repo.map((name) => {
         return {
-          title: item.name,
-          value: item.name,
+          title: name,
+          value: name,
         }
       }),
       onState: (state) => {
@@ -141,7 +140,7 @@ const createFolder = async (name: string) => {
 }
 
 const fetchGitRepo = async (template: string, targetDir: string) => {
-  const requestUrl = `zhurong-cli/${template}`
+  const requestUrl = `${defineConfig.username}/${template}`
   await wrapLoading(
     utils.promisify(downloadGitRepo),
     '下载模板中。。。',
