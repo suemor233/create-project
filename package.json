@@ -1,12 +1,18 @@
 {
-  "name": "suemor-cli",
+  "name": "@suemor/create-project",
   "version": "0.0.1",
-  "description": "",
+  "author": "suemor <suemor233@outlook.com>",
+  "license": "MIT",
+  "description": "A Command Line Tool to start a project",
   "type": "module",
   "main": "bin/cli.js",
   "bin": {
     "sr": "dist/index.mjs"
   },
+  "files": [
+    "dist",
+    "package.json"
+  ],
   "lint-staged": {
     "*.{js,jsx,ts,tsx}": [
       "eslint --cache --fix",
@@ -32,9 +38,13 @@
     "build": "unbuild",
     "lint": "eslint ."
   },
-  "keywords": [],
-  "author": "",
-  "license": "ISC",
+  "keywords": [
+    "cli",
+    "command",
+    "tool",
+    "create",
+    "project"
+  ],
   "devDependencies": {
     "@innei/bump-version": "^1.5.5",
     "@suemor/eslint-config-ts": "^1.0.1",
