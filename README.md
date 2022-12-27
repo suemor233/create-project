@@ -11,6 +11,6 @@ $ npm i -g @suemor/create-project
 $ sr create
 ```
 
-## 配置
+## 自定义
 
 你可以通过修改根目录下的 `config.ts` 来自定义项目模板
