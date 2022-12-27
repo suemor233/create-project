@@ -1,13 +1,15 @@
-// import { blue, green, red, yellow } from "kolorist";
+import { green, red, yellow } from 'kolorist'
 
-// function log(...args: any[]) {
-// 	__DEV__ && console.log(blue(`[DEV] ${args}`));
-// }
+function success(...args: any[]) {
+  console.log(green(`\n[SUCCESS] ${args}`))
+}
 
-// function warn(...args: any[]) {
-// 	console.log(yellow(`[WARN] ${args}`));
-// }
+function warn(...args: any[]) {
+  console.log(yellow(`\n[WARN] ${args}`))
+}
 
-// function error(...args: any[]) {
-// 	console.log(red(`[ERROR] ${args}`));
-// }
+function error(...args: any[]) {
+  console.log(red(`\n[ERROR] ${args}`))
+}
+
+export { success, warn, error }
