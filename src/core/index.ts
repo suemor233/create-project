@@ -2,7 +2,9 @@ import chalk from 'chalk'
 import { program } from 'commander'
 import figlet from 'figlet'
 import fs from 'fs-extra'
+import { red } from 'kolorist'
 
+import { error } from '../utils/log.js'
 import { create } from './create'
 
 const packageJson = JSON.parse(
@@ -11,19 +13,19 @@ const packageJson = JSON.parse(
   }),
 )
 
-const main = () => {
+const main = async () => {
   program
-    .command('create <app-name>')
-    .description('create a new project')
-    // -f or --force 为强制创建，如果创建的目录存在则直接覆盖
-    .option('-f, --force', 'overwrite target directory if it exist')
+    .command('create')
+    .description('创建一个项目')
+    .argument('[name]', '项目名称')
+    .option('-f, --force', '如果文件夹存在则覆盖')
+    .helpOption('-h, --help', '查看帮助')
     .action((name, options) => {
-      // 打印执行结果
       create(name, options)
     })
 
   program
-    // 配置版本号信息
+    .description('查看当前 cli 版本')
     .version(`v${packageJson.version}`)
     .usage('<command> [option]')
 
@@ -47,4 +49,8 @@ const main = () => {
   program.parse(process.argv)
 }
 
-main()
+main().catch((e) => {
+  console.error(e)
+  error('Something went wrong!')
+  process.exit(0)
+})

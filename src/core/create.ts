@@ -11,11 +11,30 @@ import { error, success } from '../utils/log.js'
 import { getRepoList } from './http.js'
 
 export const create = async (name: string, options: any) => {
-  await existFolder(name, options)
+  if (!name) {
+    name = await (await inputName()).name
+  }
+  await checkFolder(name, options)
   await createFolder(name)
 }
 
-const existFolder = async (name: string, options: any) => {
+const inputName = async () => {
+  return prompts({
+    type: 'text',
+    name: 'name',
+    initial: 'my-app',
+    message: '请输入项目名称',
+    onState: (state) => {
+      if (state.aborted) {
+        process.nextTick(() => {
+          process.exit(0)
+        })
+      }
+    }
+  })
+}
+
+const checkFolder = async (name: string, options: any) => {
   const cwd = process.cwd()
   const targetDir = path.join(cwd, name)
   if (fs.existsSync(targetDir)) {
@@ -29,6 +48,11 @@ const existFolder = async (name: string, options: any) => {
       initial: true,
       message: '当前文件夹已经存在是否覆盖？',
       onState: (state) => {
+        if (state.aborted) {
+          process.nextTick(() => {
+            process.exit(0)
+          })
+        }
         if (!state.value) {
           error(`请先移除当前文件夹`)
           process.exit(0)
@@ -55,6 +79,13 @@ const createFolder = async (name: string) => {
           value: item.name,
         }
       }),
+      onState: (state) => {
+        if (state.aborted) {
+          process.nextTick(() => {
+            process.exit(0)
+          })
+        }
+      },
     },
     {
       type: 'select',
@@ -75,6 +106,13 @@ const createFolder = async (name: string) => {
         },
       ],
       initial: 0,
+      onState: (state) => {
+        if (state.aborted) {
+          process.nextTick(() => {
+            process.exit(0)
+          })
+        }
+      },
     },
   ])
 
