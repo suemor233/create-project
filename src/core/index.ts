@@ -2,16 +2,14 @@ import chalk from 'chalk'
 import { program } from 'commander'
 import figlet from 'figlet'
 import fs from 'fs-extra'
-import { red } from 'kolorist'
-
 import { error } from '../utils/log.js'
 import { create } from './create'
 
-const packageJson = JSON.parse(
-  fs.readFileSync('./package.json', {
-    encoding: 'utf-8',
-  }),
-)
+// const packageJson = JSON.parse(
+//   fs.readFileSync('./package.json', {
+//     encoding: 'utf-8',
+//   }),
+// )
 
 const main = async () => {
   program
@@ -24,10 +22,10 @@ const main = async () => {
       create(name, options)
     })
 
-  program
-    .description('查看当前 cli 版本')
-    .version(`v${packageJson.version}`)
-    .usage('<command> [option]')
+  // program
+  //   .description('查看当前 cli 版本')
+  //   .version(`v${packageJson.version}`)
+  //   .usage('<command> [option]')
 
   program.on('--help', async () => {
     console.log(
