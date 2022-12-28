@@ -14,7 +14,9 @@ export const create = async (name: string, options: any) => {
   if (!name) {
     name = await (await inputName()).name
   }
+
   await checkFolder(name, options)
+
   await createFolder(name)
 }
 
@@ -114,7 +116,6 @@ const createFolder = async (name: string) => {
       },
     },
   ])
-
   try {
     await fetchGitRepo(template, targetDir)
   } catch (error) {
@@ -123,7 +124,6 @@ const createFolder = async (name: string) => {
   }
 
   await updatePackageJson(name, targetDir)
-
   try {
     await install({
       cwd: targetDir,
@@ -139,9 +139,9 @@ const createFolder = async (name: string) => {
   console.log(`  ${installTools} run dev\r\n`)
 }
 
-const fetchGitRepo = async (template: string, targetDir: string) => {
+export const fetchGitRepo = async (template: string, targetDir: string) => {
   const requestUrl = `${defineConfig.username}/${template}`
-  await wrapLoading(
+  return await wrapLoading(
     utils.promisify(downloadGitRepo),
     '下载模板中。。。',
     requestUrl,

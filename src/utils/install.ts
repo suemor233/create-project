@@ -10,11 +10,11 @@ export const install = async (options: installProps) => {
   return new Promise((resolve, reject) => {
     const command = options.package
     const args = ['install']
+
     const child = spawn(command, args, {
       cwd,
       stdio: ['pipe', process.stdout, process.stderr],
     })
-
     child.once('close', (code: number) => {
       if (code !== 0) {
         reject('安装失败')

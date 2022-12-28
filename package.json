@@ -38,7 +38,8 @@
     "prepare": "node ./scripts/check-config.cjs",
     "dev": "npm run build && node dist/index.mjs",
     "build": "unbuild",
-    "lint": "eslint ."
+    "lint": "eslint .",
+    "test": "vitest"
   },
   "keywords": [
     "cli",
@@ -63,7 +64,8 @@
     "kolorist": "^1.6.0",
     "prompts": "^2.4.2",
     "typescript": "^4.9.4",
-    "unbuild": "^1.0.2"
+    "unbuild": "^1.0.2",
+    "vitest": "^0.26.2"
   },
   "dependencies": {
     "chalk": "^5.2.0",

@@ -57,4 +57,3 @@ main().catch((e) => {
   error('Something went wrong!')
   process.exit(0)
 })
-// console.log('start');
