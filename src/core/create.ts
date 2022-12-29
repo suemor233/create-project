@@ -16,7 +16,6 @@ export const create = async (name: string, options: any) => {
   }
 
   await checkFolder(name, options)
-
   await createFolder(name)
 }
 

@@ -11,9 +11,9 @@ const __dirname = dirname(fileURLToPath(import.meta.url))
 describe('create project', () => {
   it('repo available', async () => {
     const dir = `${__dirname}/../app2`
-    const fetchRepo = async () => {
+    const fetchRepo = () => {
       // eslint-disable-next-line no-async-promise-executor
-      return await new Promise(async (resolve, reject) => {
+      return new Promise(async (resolve, _) => {
         for (const repo of defineConfig.repo) {
           if (fs.existsSync(dir)) {
             fs.removeSync(dir)

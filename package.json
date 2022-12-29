@@ -2,11 +2,19 @@
   "name": "@suemor/create-project",
   "version": "0.1.0",
   "author": "suemor <suemor233@outlook.com>",
+  "description": "A Command Line Tool to start a project",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/suemor233/create-project/issues"
+  },
+  "homepage": "https://github.com/suemor233/create-project#readme",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/suemor233/create-project.git"
+  },
   "bin": {
     "sr": "bin/cli.js"
   },
-  "license": "MIT",
-  "description": "A Command Line Tool to start a project",
   "type": "module",
   "main": "bin/cli.js",
   "files": [
@@ -14,12 +22,6 @@
     "bin",
     "package.json"
   ],
-  "lint-staged": {
-    "*.{js,jsx,ts,tsx}": [
-      "eslint --cache --fix",
-      "prettier --ignore-path ./.gitignore --write "
-    ]
-  },
   "config": {
     "commitizen": {
       "path": "node_modules/cz-git",
@@ -35,11 +37,19 @@
     "commit_message": "chore(release): bump @suemor/suemor-cli to v${NEW_VERSION}"
   },
   "scripts": {
-    "prepare": "node ./scripts/check-config.cjs",
+    "prepare": "node ./scripts/check-config.cjs && husky install",
     "dev": "npm run build && node dist/index.mjs",
     "build": "unbuild",
-    "lint": "eslint .",
-    "test": "vitest"
+    "lint": "eslint --ext .ts,.tsx,.js,.jsx ./",
+    "lint:fix": "eslint --fix --ext .ts,.tsx,.js,.jsx --quiet ./",
+    "lint-staged": "lint-staged",
+    "test": "vitest",
+    "release": "vv"
+  },
+  "lint-staged": {
+    "**/*.{js,jsx,tsx,ts}": [
+      "npm run lint"
+    ]
   },
   "keywords": [
     "cli",
@@ -49,6 +59,8 @@
     "project"
   ],
   "devDependencies": {
+    "@commitlint/cli": "^17.3.0",
+    "@commitlint/config-conventional": "^17.3.0",
     "@innei/bump-version": "^1.5.5",
     "@suemor/eslint-config-ts": "^1.0.1",
     "@suemor/prettier": "^1.0.1",
@@ -58,10 +70,13 @@
     "@types/node": "^18.11.18",
     "@types/prompts": "^2.4.2",
     "commander": "^9.4.1",
+    "commitlint": "^17.3.0",
     "cross-spawn": "^7.0.3",
     "cz-git": "^1.4.1",
     "fs-extra": "^11.1.0",
+    "husky": "^8.0.2",
     "kolorist": "^1.6.0",
+    "lint-staged": "13.0.0",
     "prompts": "^2.4.2",
     "typescript": "^4.9.4",
     "unbuild": "^1.0.2",
