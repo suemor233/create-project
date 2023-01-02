@@ -4,6 +4,7 @@ import figlet from 'figlet'
 import fs from 'fs-extra'
 import { dirname } from 'path'
 import { fileURLToPath } from 'url'
+import { lint } from './lint';
 
 import { error } from '../utils/log.js'
 import { create } from './create'
@@ -19,12 +20,22 @@ const packageJson = JSON.parse(
 const main = async () => {
   program
     .command('create')
-    .description('create a project')
+    .description('创建一个项目')
     .argument('[name]', '项目名称')
     .option('-f, --force', '如果文件夹存在则覆盖')
     .helpOption('-h, --help', '查看帮助')
     .action((name, options) => {
       create(name, options)
+    })
+
+    program
+    .command('lint')
+    .description('配置 eslint 和 prettier')
+    .argument('[]')
+    .option('-f, --force', '如果文件存在则覆盖')
+    .helpOption('-h, --help', '查看帮助')
+    .action((name, options) => {
+      lint(name,options)
     })
 
   program
@@ -54,6 +65,5 @@ const main = async () => {
 
 main().catch((e) => {
   console.error(e)
-  error('Something went wrong!')
-  process.exit(0)
+  error('Something went wrong!',true)
 })

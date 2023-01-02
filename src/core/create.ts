@@ -7,7 +7,7 @@ import utils from 'util'
 
 import defineConfig from '../../config'
 import { wrapLoading } from '../utils/animation.js'
-import { install } from '../utils/install.js'
+import { install } from '../utils/package.js'
 import { error, success } from '../utils/log.js'
 
 export const create = async (name: string, options: any) => {

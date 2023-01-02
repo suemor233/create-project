@@ -1,4 +1,5 @@
 import spawn from 'cross-spawn'
+import fs from 'node:fs'
 
 interface installProps {
   cwd: string // 项目路径
@@ -24,4 +25,22 @@ export const install = async (options: installProps) => {
     })
     child.once('error', reject)
   })
+}
+
+const npm = 'package-lock.json'
+const yarn = 'yarn.lock'
+const pnpm = 'pnpm-lock.yaml'
+const lockFiles = [npm, yarn, pnpm]
+
+export const getPackageManager = () => {
+  const pkgManager = lockFiles.find((v) => fs.existsSync(v))
+  if (!pkgManager) {
+    return 'npm'
+  } else {
+    const pkg = pkgManager.split('-')[0]
+    if (pkg === 'package') {
+      return 'npm'
+    }
+    return pkg
+  }
 }
