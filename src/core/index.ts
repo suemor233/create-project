@@ -4,10 +4,10 @@ import figlet from 'figlet'
 import fs from 'fs-extra'
 import { dirname } from 'path'
 import { fileURLToPath } from 'url'
-import { lint } from './lint';
 
 import { error } from '../utils/log.js'
 import { create } from './create'
+import { lint } from './lint'
 
 const __dirname = dirname(fileURLToPath(import.meta.url))
 
@@ -28,14 +28,14 @@ const main = async () => {
       create(name, options)
     })
 
-    program
+  program
     .command('lint')
     .description('配置 eslint 和 prettier')
     .argument('[]')
     .option('-f, --force', '如果文件存在则覆盖')
     .helpOption('-h, --help', '查看帮助')
     .action((name, options) => {
-      lint(name,options)
+      lint(name, options)
     })
 
   program
@@ -65,5 +65,5 @@ const main = async () => {
 
 main().catch((e) => {
   console.error(e)
-  error('Something went wrong!',true)
+  error('Something went wrong!', true)
 })

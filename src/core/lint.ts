@@ -24,7 +24,7 @@ export const lint = async (_: string, options: any) => {
 
   await writeLint(eslint, prettier)
 
-  success('eslint 和 ')
+  success('eslint 和 prettier 配置成功')
 }
 
 const checkFileExists = (options: any) => {
