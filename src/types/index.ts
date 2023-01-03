@@ -1,8 +1,8 @@
 export interface GithubConfig {
   username?: string
   repo?: string[]
-  eslint?:string
-  prettier?:string
+  eslint?:string[]
+  prettier?:string[]
 }
 
 

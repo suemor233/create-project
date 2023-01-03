@@ -7,7 +7,7 @@ export default defineConfig({
   // github 仓库名
   repo: ['nest-template', 'vue3-template'],
   // eslint 配置
-  eslint: '@suemor/eslint-config-ts',
+  eslint: ['@suemor/eslint-config-ts'],
   // prettier 配置
-  prettier: '@suemor/prettier'
+  prettier: ['@suemor/prettier'],
 })

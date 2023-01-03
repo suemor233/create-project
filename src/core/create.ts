@@ -55,8 +55,8 @@ const checkFolder = async (name: string, options: any) => {
           })
         }
         if (!state.value) {
-          error(`请先移除当前文件夹`)
-          process.exit(0)
+          error(`请先移除当前文件夹`,true)
+      
         }
         fs.remove(targetDir)
       },
@@ -152,8 +152,7 @@ const updatePackageJson = async (name: string, targetDir: string) => {
   const _path = path.resolve(targetDir, 'package.json')
   const packageJson = JSON.parse(fs.readFileSync(_path, 'utf-8'))
   if (!packageJson) {
-    error('无法找到 package.json')
-    process.exit(0)
+    error('无法找到 package.json',true)
   }
   packageJson.name = name
   fs.writeFileSync(_path, JSON.stringify(packageJson, null, 2))
