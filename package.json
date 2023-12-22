@@ -67,7 +67,7 @@
     "@types/cross-spawn": "^6.0.2",
     "@types/figlet": "^1.5.5",
     "@types/fs-extra": "^11.0.0",
-    "@types/node": "^18.11.18",
+    "@types/node": "^20.0.0",
     "@types/prompts": "^2.4.2",
     "commander": "^9.4.1",
     "commitlint": "^17.3.0",
