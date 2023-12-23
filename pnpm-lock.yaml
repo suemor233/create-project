@@ -12,7 +12,7 @@ specifiers:
   '@types/node': ^20.0.0
   '@types/prompts': ^2.4.2
   chalk: ^5.2.0
-  commander: ^9.4.1
+  commander: ^11.0.0
   commitlint: ^17.3.0
   cross-spawn: ^7.0.3
   cz-git: ^1.4.1
@@ -46,7 +46,7 @@ devDependencies:
   '@types/fs-extra': 11.0.0
   '@types/node': 20.10.5
   '@types/prompts': 2.4.2
-  commander: 9.4.1
+  commander: 11.1.0
   commitlint: 17.3.0
   cross-spawn: 7.0.3
   cz-git: 1.4.1
@@ -1697,6 +1697,11 @@ packages:
 
   /colorette/2.0.19:
     resolution: {integrity: sha512-3tlv/dIP7FWvj3BsbHrGLJ6l/oKh1O3TcgBqMn+yyCagOxc23fyzDS6HypQbgxWbkpDnf52p1LuR4eWDQ/K9WQ==}
+    dev: true
+
+  /commander/11.1.0:
+    resolution: {integrity: sha512-yPVavfyCcRhmorC7rWlkHn15b4wDVgVmBA7kV4QVBsF7kv/9TKJAbAXVTxvTnwP8HHKjRCJDClKbciiYS7p0DQ==}
+    engines: {node: '>=16'}
     dev: true
 
   /commander/2.20.3:
