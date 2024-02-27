@@ -59,8 +59,8 @@
     "project"
   ],
   "devDependencies": {
-    "@commitlint/cli": "^17.3.0",
-    "@commitlint/config-conventional": "^17.3.0",
+    "@commitlint/cli": "^19.0.0",
+    "@commitlint/config-conventional": "^19.0.0",
     "@innei/bump-version": "^1.5.5",
     "@suemor/eslint-config-ts": "1.1.0",
     "@suemor/prettier": "1.1.0",
@@ -70,7 +70,7 @@
     "@types/node": "^20.0.0",
     "@types/prompts": "^2.4.2",
     "commander": "^9.4.1",
-    "commitlint": "^17.3.0",
+    "commitlint": "^19.0.0",
     "cross-spawn": "^7.0.3",
     "cz-git": "^1.4.1",
     "fs-extra": "^11.1.0",
